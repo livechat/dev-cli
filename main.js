@@ -5,19 +5,26 @@ import gradient from "gradient-string";
 import { hideBin } from "yargs/helpers";
 import { login } from "./commands/login.js";
 import { bootstrap } from "./commands/bootstrap.js";
-import { create } from "./commands/create.js";
-import { widget } from "./commands/widget.js";
-import { remove } from "./commands/remove.js";
-import { auth } from "./commands/auth.js";
-import { appWebhooks } from "./commands/app-webhooks.js";
-import { chatWebhooks } from "./commands/chat-webhooks.js";
-import { chatActions } from "./commands/chat-actions.js";
-import { chatBoosters } from "./commands/chat-boosters.js";
-import { ensureToken } from "./lib/ensure-token.js";
+import { init } from './commands/init.js'
+import { create } from './commands/create.js'
+import { widget } from './commands/widget.js'
+import { remove } from './commands/remove.js'
+import { auth } from './commands/auth.js'
+import { appWebhooks } from './commands/app-webhooks.js'
+import { chatWebhooks } from './commands/chat-webhooks.js'
+import { chatActions } from './commands/chat-actions.js'
+import { chatBoosters } from './commands/chat-boosters.js'
+import { ensureToken } from './lib/ensure-token.js'
 
-console.log(gradient.passion("\nLiveChat Developer Console CLI\n"));
+console.log(gradient.passion('\nLiveChat Developer Console CLI\n'))
 
 yargs(hideBin(process.argv))
+  .command(
+    'init [dirName]',
+    'scafold new LiveChat app project from template',
+    (y) => y.positional('dirName', { type: 'string' }),
+    init,
+  )
   .command('login', 'login with your LiveChat account', {}, login)
   .command(
     'bootstrap',
