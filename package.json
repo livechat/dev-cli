@@ -1,0 +1,33 @@
+{
+  "name": "dps-cli",
+  "type": "module",
+  "version": "0.0.0-alpha.1",
+  "private": "true",
+  "bin": {
+    "dps": "./main.js"
+  },
+  "dependencies": {
+    "configstore": "^6.0.0",
+    "gradient-string": "^2.0.0",
+    "micro": "^9.3.4",
+    "node-fetch": "^3.2.3",
+    "open": "^8.4.0",
+    "ora": "^6.1.0",
+    "prompts": "^2.4.2",
+    "signale": "^1.4.0",
+    "yargs": "^17.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.12.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.6.2"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint",
+    "*.{ts,tsx,json,md,css}": "prettier --write"
+  }
+}
