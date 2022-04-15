@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import yargs from "yargs";
-import gradient from "gradient-string";
-import { hideBin } from "yargs/helpers";
-import { login } from "./commands/login.js";
-import { bootstrap } from "./commands/bootstrap.js";
+import yargs from 'yargs'
+import gradient from 'gradient-string'
+import { hideBin } from 'yargs/helpers'
+import { login } from './commands/login.js'
+import { bootstrap } from './commands/bootstrap.js'
 import { init } from './commands/init.js'
 import { create } from './commands/create.js'
 import { widget } from './commands/widget.js'
@@ -71,7 +71,7 @@ yargs(hideBin(process.argv))
         appId: { type: 'string' },
         clientType: { type: 'string' },
         scopes: { type: 'array' },
-        redirectURI: { type: 'string' },
+        redirectURI: { type: 'array' },
       }),
     auth,
   )

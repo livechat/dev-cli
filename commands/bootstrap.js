@@ -19,7 +19,7 @@ export async function bootstrap({ configPath, baseURL, install }) {
 
   const appConfig = JSON.parse(configRaw)
 
-  const appId = await create({ name: appConfig.name })
+  const appId = appConfig.appId ?? (await create({ name: appConfig.name }))
 
   if (!appId) {
     process.exit(1)
