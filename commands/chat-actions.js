@@ -1,13 +1,10 @@
 import signale from 'signale'
-import fetch from 'node-fetch'
-import { id } from '../lib/id.js'
 import { loader } from '../lib/loader.js'
-import { store } from '../lib/store.js'
-import { config } from '../lib/config.js'
 import { getURLPrompt } from '../prompts/url.js'
 import { getAppIdPrompt } from '../prompts/app-id.js'
 import { getChatActionPrompt } from '../prompts/chat-action.js'
 import { getTextPrompt } from '../prompts/text.js'
+import { DevPlatformService } from '../services/dev-platform.js'
 
 export async function chatActions(options) {
   const appId = options.appId ?? (await getAppIdPrompt())
@@ -22,28 +19,16 @@ export async function chatActions(options) {
 
   loader.start('setting up chat actions')
   try {
-    const { elements } = await fetch(`${config.dpsApiUrl}/v2/applications/${appId}`, {
-      headers: { Authorization: `Bearer ${store.get('access_token')}` },
-    }).then((res) => res.json())
-
+    const { elements } = await DevPlatformService.getApp({ appId })
     const button = elements.buttons?.find((b) => b.action === action)
-    const buttonId = button ? button.id : id()
 
-    const { errors } = await fetch(`${config.dpsApiUrl}/v2/applications/${appId}/chat-actions/${buttonId}`, {
-      method: button ? 'PATCH' : 'PUT',
-      headers: {
-        Authorization: `Bearer ${store.get('access_token')}`,
-      },
-      body: JSON.stringify({
-        url,
-        label,
-        action,
-      }),
-    }).then((res) => res.json())
-
-    if (errors) {
-      throw new Error(errors)
-    }
+    const { buttonId } = await DevPlatformService.upsertChatAction({
+      appId,
+      url,
+      label,
+      action,
+      ...(button && { buttonId: button.id }),
+    })
 
     loader.stop()
     signale.success(`chat action '${action}' ${button ? 'updated' : 'created'}`)

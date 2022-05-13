@@ -1,8 +1,5 @@
 import fs from 'fs'
-import fetch from 'node-fetch'
 import gradient from 'gradient-string'
-import { config } from '../lib/config.js'
-import { store } from '../lib/store.js'
 import { create } from './create.js'
 import { auth } from './auth.js'
 import { widget } from './widget.js'
@@ -10,6 +7,7 @@ import { chatActions } from './chat-actions.js'
 import { chatBoosters } from './chat-boosters.js'
 import { chatWebhooks } from './chat-webhooks.js'
 import { appWebhooks } from './app-webhooks.js'
+import { DevPlatformService } from '../services/dev-platform.js'
 
 const steps = [auth, widget, chatActions, chatBoosters, chatWebhooks, appWebhooks]
 
@@ -39,10 +37,7 @@ export async function bootstrap({ configPath, baseURL, install }) {
   }
 
   if (install) {
-    await fetch(`${config.dpsApiUrl}/v2/applications/${appId}/install`, {
-      method: 'PUT',
-      headers: { Authorization: `Bearer ${store.get('access_token')}` },
-    })
+    DevPlatformService.installApp({ appId })
   }
 
   console.log(gradient.passion(`\n🚀 App bootstrapped 🚀\n`))

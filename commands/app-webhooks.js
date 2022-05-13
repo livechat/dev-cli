@@ -1,10 +1,8 @@
 import signale from 'signale'
-import fetch from 'node-fetch'
 import { loader } from '../lib/loader.js'
-import { store } from '../lib/store.js'
-import { config } from '../lib/config.js'
 import { getAppIdPrompt } from '../prompts/app-id.js'
 import { getURLPrompt } from '../prompts/url.js'
+import { DevPlatformService } from '../services/dev-platform.js'
 
 export async function appWebhooks(options) {
   const appId = options.appId ?? (await getAppIdPrompt())
@@ -18,17 +16,7 @@ export async function appWebhooks(options) {
   try {
     loader.start('setting up app webhooks')
 
-    const { errors } = await fetch(`${config.dpsApiUrl}/v2/applications/${appId}/webhook`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${store.get('access_token')}`,
-      },
-      body: JSON.stringify({ url }),
-    }).then((res) => res.json())
-
-    if (errors) {
-      throw new Error(errors)
-    }
+    await DevPlatformService.updateAppWebhook({ appId, url })
 
     loader.stop()
     signale.success('app webhook added')

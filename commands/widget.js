@@ -1,12 +1,9 @@
-import uuid from 'short-uuid'
 import signale from 'signale'
-import fetch from 'node-fetch'
 import { loader } from '../lib/loader.js'
-import { store } from '../lib/store.js'
-import { config } from '../lib/config.js'
 import { getURLPrompt } from '../prompts/url.js'
 import { getAppIdPrompt } from '../prompts/app-id.js'
 import { getWidgetPlacementPrompt } from '../prompts/widget-placement.js'
+import { DevPlatformService } from '../services/dev-platform.js'
 
 export async function widget(options) {
   const appId = options.appId ?? (await getAppIdPrompt())
@@ -21,32 +18,19 @@ export async function widget(options) {
   try {
     loader.start('setting up agent app widget')
 
-    const { elements, code } = await fetch(`${config.dpsApiUrl}/v2/applications/${appId}`, {
-      headers: {
-        Authorization: `Bearer ${store.get('access_token')}`,
-      },
-    }).then((res) => res.json())
+    const { elements, code } = await DevPlatformService.getApp({ appId })
 
     if (code === 'APPLICATION_NOT_FOUND') {
       throw new Error(`App with id: '${appId}' does not exists`)
     }
 
     const widget = elements.widgets?.find((w) => w.placement === placement)
-    const widgetId = widget ? widget.id : uuid.generate()
-    const { errors } = await fetch(`${config.dpsApiUrl}/v2/applications/${appId}/widgets/${widgetId}`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${store.get('access_token')}`,
-      },
-      body: JSON.stringify({
-        url,
-        placement,
-        initialState: null,
-      }),
-    }).then((res) => res.json())
-    if (errors) {
-      throw new Error(errors)
-    }
+    const { widgetId } = await DevPlatformService.upsertWidget({
+      appId,
+      url,
+      placement,
+      ...(widget && { widgetId: widget.id }),
+    })
 
     loader.stop()
     signale.success(`widget '${placement}' ${widget ? 'updated' : 'created'}`)

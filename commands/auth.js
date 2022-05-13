@@ -1,13 +1,12 @@
-import fetch from 'node-fetch'
 import signale from 'signale'
-import { store } from '../lib/store.js'
 import { loader } from '../lib/loader.js'
 import { config } from '../lib/config.js'
 import { getAppIdPrompt } from '../prompts/app-id.js'
 import { getScopesPrompt } from '../prompts/scopes.js'
 import { getClientTypePrompt } from '../prompts/client-type.js'
-import { fetchApp } from '../lib/fetch-app.js'
 import { getRedirectURI } from '../prompts/redirect-uri.js'
+import { DevPlatformService } from '../services/dev-platform.js'
+import { AccountsService } from '../services/accounts.js'
 
 export async function auth(options) {
   const appId = options.appId ?? (await getAppIdPrompt())
@@ -23,74 +22,29 @@ export async function auth(options) {
   try {
     loader.start('setting up app authorization')
 
-    const app = await fetchApp(appId)
+    const app = await DevPlatformService.getApp({ appId })
     let clientSecret = null
     let clientId = app.authorization?.clientId
 
     if (clientId) {
-      const { error } = await fetch(`${config.accountsUrl}/v2/clients/${clientId}`, {
-        method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${store.get('access_token')}`,
-        },
-        body: JSON.stringify({
-          type: clientType,
-          redirect_uri: redirectURI.join(','),
-        }),
-      }).then((res) => res.json())
-
-      if (error) {
-        throw new Error(error)
-      }
+      await AccountsService.updateSSOClient({ clientId, clientType, redirectURI })
     } else {
-      const { client_id, secret, error } = await fetch(`${config.accountsUrl}/v2/clients`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${store.get('access_token')}`,
-        },
-        body: JSON.stringify({
-          type: clientType,
-          visibility: 'private',
-          redirect_uri: redirectURI.join(','),
-          name: app.name,
-          scopes: [],
-          configuration_uri: `${config.dpsApiUrl}/v2/applications/${appId}/authorization"`,
-        }),
-      }).then((res) => res.json())
-
-      if (error) {
-        throw new Error(error)
-      }
-
-      const { errors } = await fetch(`${config.dpsApiUrl}/v2/applications/${appId}/authorization`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${store.get('access_token')}`,
-        },
-        body: JSON.stringify({
-          ssoClient: client_id,
-        }),
-      }).then((res) => res.json())
-
-      if (errors) {
-        throw new Error(errors)
-      }
+      const { client_id, secret } = await AccountsService.createSSOClient({
+        clientType,
+        redirectURI,
+        clientName: app.name,
+        configurationUri: `${config.dpsApiUrl}/v2/applications/${appId}/authorization"`,
+      })
+      await DevPlatformService.registerSSOClient({ appId, clientId: client_id })
 
       clientId = client_id
       clientSecret = secret
     }
 
-    const { error } = await fetch(`${config.accountsUrl}/v2/clients/${clientId}/scopes`, {
-      headers: {
-        Authorization: `Bearer ${store.get('access_token')}`,
-      },
-      method: 'PUT',
-      body: JSON.stringify(scopes.map((s) => ({ scope: s, required: true }))),
-    }).then((res) => res.json())
-
-    if (error) {
-      throw new Error(error)
-    }
+    await AccountsService.updateSSOClientScopes({
+      clientId,
+      scopes: scopes.map((s) => ({ scope: s, required: true })),
+    })
 
     loader.stop()
     if (clientSecret) {

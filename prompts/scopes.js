@@ -1,13 +1,12 @@
 import prompts from 'prompts'
 import signale from 'signale'
-import fetch from 'node-fetch'
-import { config } from '../lib/config.js'
 import { loader } from '../lib/loader.js'
+import { AccountsService } from '../services/accounts.js'
 
 export async function getScopesPrompt() {
   try {
     loader.start('loading scopes')
-    const allScopes = await fetch(`${config.accountsUrl}/v2/scopes`).then((res) => res.json())
+    const allScopes = await AccountsService.getScopes()
     loader.stop()
 
     const { scopes } = await prompts({

@@ -1,12 +1,9 @@
 import signale from 'signale'
-import fetch from 'node-fetch'
-import { id } from '../lib/id.js'
 import { loader } from '../lib/loader.js'
-import { store } from '../lib/store.js'
-import { config } from '../lib/config.js'
 import { getAppIdPrompt } from '../prompts/app-id.js'
 import { getURLPrompt } from '../prompts/url.js'
 import { getTextPrompt } from '../prompts/text.js'
+import { DevPlatformService } from '../services/dev-platform.js'
 
 export async function chatBoosters(options) {
   const appId = options.appId ?? (await getAppIdPrompt())
@@ -23,23 +20,7 @@ export async function chatBoosters(options) {
   loader.start('setting up chat boosters')
 
   try {
-    const chatBoosterId = id()
-    const { errors } = await fetch(`${config.dpsApiUrl}/v2/applications/${appId}/chat-boosters/${chatBoosterId}`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${store.get('access_token')}`,
-      },
-      body: JSON.stringify({
-        url,
-        title,
-        ctaLabel,
-        description,
-      }),
-    }).then((res) => res.json())
-
-    if (errors) {
-      throw new Error(errors)
-    }
+    const chatBoosterId = await DevPlatformService.upsertChatBoosters({ appId, url, title, ctaLabel, description })
 
     loader.stop()
     signale.success(`chat booster '${title}' created`)

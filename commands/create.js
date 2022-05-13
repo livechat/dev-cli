@@ -1,9 +1,7 @@
-import fetch from 'node-fetch'
 import signale from 'signale'
 import { loader } from '../lib/loader.js'
-import { store } from '../lib/store.js'
-import { config } from '../lib/config.js'
 import { getTextPrompt } from '../prompts/text.js'
+import { DevPlatformService } from '../services/dev-platform.js'
 
 export async function create(options) {
   const name = options.name || (await getTextPrompt('app name'))
@@ -15,22 +13,14 @@ export async function create(options) {
 
   try {
     loader.start(`creating app with name: '${name}'`)
-    const data = await fetch(`${config.dpsApiUrl}/v2/applications`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${store.get('access_token')}`,
-      },
-      body: JSON.stringify({
-        name,
-        origin: 'livechat',
-      }),
-    }).then((res) => res.json())
+
+    const { id } = await DevPlatformService.createApp({ name })
 
     loader.stop()
     signale.success(`app '${name}' created`)
-    signale.info(`app id: ${data.id}`)
-    signale.info(`https://developers.labs.livechat.com/console/apps/${data.id}`)
-    return data.id
+    signale.info(`app id: ${id}`)
+    signale.info(`https://developers.labs.livechat.com/console/apps/${id}`)
+    return id
   } catch (error) {
     loader.stop()
     signale.error(error.message)
