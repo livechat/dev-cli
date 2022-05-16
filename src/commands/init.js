@@ -1,7 +1,7 @@
 import { exec } from 'child_process'
 import signale from 'signale'
-import { getTextPrompt } from '../prompts/text.js'
-import { loader } from '../lib/loader.js'
+import { getTextPrompt } from '../prompts/text'
+import { loader } from '../lib/loader'
 
 export async function init(options) {
   const dirName = options.dirName || (await getTextPrompt('directory name'))

@@ -1,5 +1,5 @@
 import prompts from 'prompts'
-import { CHAT_WEBHOOK_EVENTS } from '../lib/chat-webhooks-events.js'
+import { CHAT_WEBHOOK_EVENTS } from '../lib/chat-webhooks-events'
 
 export async function getChatWebhookActionsPrompt() {
   const { actions } = await prompts([

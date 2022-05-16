@@ -1,7 +1,7 @@
 import signale from 'signale'
 import prompts from 'prompts'
-import { loader } from '../lib/loader.js'
-import { DevPlatformService } from '../services/dev-platform.js'
+import { loader } from '../lib/loader'
+import { DevPlatformService } from '../services/dev-platform'
 
 export async function getAppIdPrompt() {
   try {

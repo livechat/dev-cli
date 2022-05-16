@@ -1,7 +1,7 @@
 import signale from 'signale'
-import { loader } from '../lib/loader.js'
-import { getAppIdPrompt } from '../prompts/app-id.js'
-import { DevPlatformService } from '../services/dev-platform.js'
+import { loader } from '../lib/loader'
+import { getAppIdPrompt } from '../prompts/app-id'
+import { DevPlatformService } from '../services/dev-platform'
 
 export async function remove(options) {
   const appId = options.appId ?? (await getAppIdPrompt())

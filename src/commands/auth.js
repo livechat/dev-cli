@@ -1,12 +1,12 @@
 import signale from 'signale'
-import { loader } from '../lib/loader.js'
-import { config } from '../lib/config.js'
-import { getAppIdPrompt } from '../prompts/app-id.js'
-import { getScopesPrompt } from '../prompts/scopes.js'
-import { getClientTypePrompt } from '../prompts/client-type.js'
-import { getRedirectURI } from '../prompts/redirect-uri.js'
-import { DevPlatformService } from '../services/dev-platform.js'
-import { AccountsService } from '../services/accounts.js'
+import { loader } from '../lib/loader'
+import { config } from '../lib/config'
+import { getAppIdPrompt } from '../prompts/app-id'
+import { getScopesPrompt } from '../prompts/scopes'
+import { getClientTypePrompt } from '../prompts/client-type'
+import { getRedirectURI } from '../prompts/redirect-uri'
+import { DevPlatformService } from '../services/dev-platform'
+import { AccountsService } from '../services/accounts'
 
 export async function auth(options) {
   const appId = options.appId ?? (await getAppIdPrompt())

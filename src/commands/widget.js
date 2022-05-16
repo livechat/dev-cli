@@ -1,9 +1,9 @@
 import signale from 'signale'
-import { loader } from '../lib/loader.js'
-import { getURLPrompt } from '../prompts/url.js'
-import { getAppIdPrompt } from '../prompts/app-id.js'
-import { getWidgetPlacementPrompt } from '../prompts/widget-placement.js'
-import { DevPlatformService } from '../services/dev-platform.js'
+import { loader } from '../lib/loader'
+import { getURLPrompt } from '../prompts/url'
+import { getAppIdPrompt } from '../prompts/app-id'
+import { getWidgetPlacementPrompt } from '../prompts/widget-placement'
+import { DevPlatformService } from '../services/dev-platform'
 
 export async function widget(options) {
   const appId = options.appId ?? (await getAppIdPrompt())

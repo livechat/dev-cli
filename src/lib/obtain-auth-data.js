@@ -1,7 +1,7 @@
 import open from 'open'
 import micro, { send } from 'micro'
-import { config } from './config.js'
-import { AccountsService } from '../services/accounts.js'
+import { config } from './config'
+import { AccountsService } from '../services/accounts'
 
 export async function obtainAuthData() {
   return new Promise((resolve, reject) => {

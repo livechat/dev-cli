@@ -1,13 +1,13 @@
 import fs from 'fs'
 import gradient from 'gradient-string'
-import { create } from './create.js'
-import { auth } from './auth.js'
-import { widget } from './widget.js'
-import { chatActions } from './chat-actions.js'
-import { chatBoosters } from './chat-boosters.js'
-import { chatWebhooks } from './chat-webhooks.js'
-import { appWebhooks } from './app-webhooks.js'
-import { DevPlatformService } from '../services/dev-platform.js'
+import { create } from './create'
+import { auth } from './auth'
+import { widget } from './widget'
+import { chatActions } from './chat-actions'
+import { chatBoosters } from './chat-boosters'
+import { chatWebhooks } from './chat-webhooks'
+import { appWebhooks } from './app-webhooks'
+import { DevPlatformService } from '../services/dev-platform'
 
 const steps = [auth, widget, chatActions, chatBoosters, chatWebhooks, appWebhooks]
 

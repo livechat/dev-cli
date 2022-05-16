@@ -1,7 +1,7 @@
 import signale from 'signale'
-import { loader } from '../lib/loader.js'
-import { getTextPrompt } from '../prompts/text.js'
-import { DevPlatformService } from '../services/dev-platform.js'
+import { loader } from '../lib/loader'
+import { getTextPrompt } from '../prompts/text'
+import { DevPlatformService } from '../services/dev-platform'
 
 export async function create(options) {
   const name = options.name || (await getTextPrompt('app name'))

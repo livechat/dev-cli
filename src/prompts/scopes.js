@@ -1,7 +1,7 @@
 import prompts from 'prompts'
 import signale from 'signale'
-import { loader } from '../lib/loader.js'
-import { AccountsService } from '../services/accounts.js'
+import { loader } from '../lib/loader'
+import { AccountsService } from '../services/accounts'
 
 export async function getScopesPrompt() {
   try {

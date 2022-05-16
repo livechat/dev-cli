@@ -1,9 +1,9 @@
 import signale from 'signale'
-import { loader } from '../lib/loader.js'
-import { getAppIdPrompt } from '../prompts/app-id.js'
-import { getURLPrompt } from '../prompts/url.js'
-import { getTextPrompt } from '../prompts/text.js'
-import { DevPlatformService } from '../services/dev-platform.js'
+import { loader } from '../lib/loader'
+import { getAppIdPrompt } from '../prompts/app-id'
+import { getURLPrompt } from '../prompts/url'
+import { getTextPrompt } from '../prompts/text'
+import { DevPlatformService } from '../services/dev-platform'
 
 export async function chatBoosters(options) {
   const appId = options.appId ?? (await getAppIdPrompt())

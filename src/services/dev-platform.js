@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
-import { store } from '../lib/store.js'
-import { config } from '../lib/config.js'
-import { id } from '../lib/id.js'
+import { store } from '../lib/store'
+import { config } from '../lib/config'
+import { id } from '../lib/id'
 
 function getHeaders() {
   return {

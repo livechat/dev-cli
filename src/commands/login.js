@@ -1,8 +1,8 @@
 import signale from 'signale'
 import prompts from 'prompts'
-import { loader } from '../lib/loader.js'
-import { store } from '../lib/store.js'
-import { obtainAuthData } from '../lib/obtain-auth-data.js'
+import { loader } from '../lib/loader'
+import { store } from '../lib/store'
+import { obtainAuthData } from '../lib/obtain-auth-data'
 
 export async function login() {
   const { ok } = await prompts({

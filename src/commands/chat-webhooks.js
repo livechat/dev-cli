@@ -1,11 +1,11 @@
 import signale from 'signale'
-import { loader } from '../lib/loader.js'
-import { getAppIdPrompt } from '../prompts/app-id.js'
-import { getURLPrompt } from '../prompts/url.js'
-import { getTextPrompt } from '../prompts/text.js'
-import { getChatWebhookActionsPrompt } from '../prompts/chat-webhook-actions.js'
-import { DevPlatformService } from '../services/dev-platform.js'
-import { ConfigurationApiService } from '../services/configuration-api.js'
+import { loader } from '../lib/loader'
+import { getAppIdPrompt } from '../prompts/app-id'
+import { getURLPrompt } from '../prompts/url'
+import { getTextPrompt } from '../prompts/text'
+import { getChatWebhookActionsPrompt } from '../prompts/chat-webhook-actions'
+import { DevPlatformService } from '../services/dev-platform'
+import { ConfigurationApiService } from '../services/configuration-api'
 
 export async function chatWebhooks(options) {
   const appId = options.appId ?? (await getAppIdPrompt())

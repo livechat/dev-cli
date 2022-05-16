@@ -1,10 +1,10 @@
 import signale from 'signale'
-import { loader } from '../lib/loader.js'
-import { getURLPrompt } from '../prompts/url.js'
-import { getAppIdPrompt } from '../prompts/app-id.js'
-import { getChatActionPrompt } from '../prompts/chat-action.js'
-import { getTextPrompt } from '../prompts/text.js'
-import { DevPlatformService } from '../services/dev-platform.js'
+import { loader } from '../lib/loader'
+import { getURLPrompt } from '../prompts/url'
+import { getAppIdPrompt } from '../prompts/app-id'
+import { getChatActionPrompt } from '../prompts/chat-action'
+import { getTextPrompt } from '../prompts/text'
+import { DevPlatformService } from '../services/dev-platform'
 
 export async function chatActions(options) {
   const appId = options.appId ?? (await getAppIdPrompt())

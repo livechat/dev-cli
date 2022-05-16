@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
-import { config } from '../lib/config.js'
-import { store } from '../lib/store.js'
+import { config } from '../lib/config'
+import { store } from '../lib/store'
 
 function getHeaders() {
   return {

@@ -1,5 +1,5 @@
 import signale from 'signale'
-import { getTextPrompt } from './text.js'
+import { getTextPrompt } from './text'
 
 export async function getURLPrompt(message = 'url') {
   const url = await getTextPrompt(message)
