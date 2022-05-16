@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import yargs from 'yargs'
 import gradient from 'gradient-string'
 import { hideBin } from 'yargs/helpers'

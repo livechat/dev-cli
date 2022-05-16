@@ -1,11 +1,14 @@
 {
   "name": "dps-cli",
-  "type": "module",
   "version": "0.0.0-alpha.1",
   "private": "true",
+  "main": "./src/main.js",
   "bin": {
-    "dps": "./main.js"
+    "dps": "./dist/bin.mjs"
   },
+  "files": [
+    "dst"
+  ],
   "dependencies": {
     "configstore": "^6.0.0",
     "gradient-string": "^2.0.0",
@@ -14,21 +17,30 @@
     "open": "^8.4.0",
     "ora": "^6.1.0",
     "prompts": "^2.4.2",
-    "short-uuid": "^4.2.0",
     "signale": "^1.4.0",
     "yargs": "^17.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "eslint": "^8.12.0",
     "husky": "^7.0.0",
     "lint-staged": "^12.3.7",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.72.1"
   },
   "scripts": {
-    "prepare": "husky install"
+    "start": "rollup -c -w",
+    "build": "rimraf dist && rollup -c",
+    "prepare": "husky install",
+    "clean": "git clean -fdX",
+    "lint": "eslint ./src/**/*.js"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "eslint",
-    "*.{ts,tsx,json,md,css}": "prettier --write"
+    "*.js": "eslint",
+    "*.{js,json,md}": "prettier --write"
   }
 }
