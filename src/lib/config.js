@@ -1,8 +1,9 @@
 export const config = {
-  clientId: 'df694dc46d1c38c0ca2c42f65472318e',
-  clientSecret: '0e929039319b6f816aab27bc15bd3b89b6a6e32e',
-  accountsUrl: 'https://accounts.labs.livechat.com',
-  dpsApiUrl: 'https://dev-platform.labs.livechatinc.com',
-  lcApiUrl: 'https://api.labs.livechatinc.com',
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
   webServerUrl: 'http://localhost:5555',
+  lcApiUrl: 'https://api.livechatinc.com',
+  accountsUrl: 'https://accounts.livechat.com',
+  devConsoleUrl: 'https://developers.livechat.com/console',
+  devPlatformApiUrl: 'https://dev-platform.livechatinc.com',
 }

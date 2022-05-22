@@ -1,5 +1,6 @@
 import yargs from 'yargs'
 import gradient from 'gradient-string'
+import boxen from 'boxen'
 import { hideBin } from 'yargs/helpers'
 import { login } from './commands/login'
 import { bootstrap } from './commands/bootstrap'
@@ -14,12 +15,12 @@ import { chatActions } from './commands/chat-actions'
 import { chatBoosters } from './commands/chat-boosters'
 import { ensureToken } from './lib/ensure-token'
 
-console.log(gradient.passion('\nLiveChat Developer Console CLI\n'))
+console.log(gradient.fruit(boxen('LiveChat Developer Console CLI', { padding: 1 }) + '\n'))
 
 yargs(hideBin(process.argv))
   .command(
     'init [dirName]',
-    'scafold new LiveChat app project from template',
+    'scaffold new LiveChat app project from template',
     (y) => y.positional('dirName', { type: 'string' }),
     init,
   )

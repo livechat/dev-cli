@@ -1,15 +1,16 @@
 {
-  "name": "@livechat/dps-cli",
+  "name": "@livechat/dev-cli",
   "version": "0.0.0-alpha.1",
   "private": "true",
   "main": "./src/main.js",
   "bin": {
-    "dps": "./dist/bin.mjs"
+    "lcdev": "./dist/bin.mjs"
   },
   "files": [
     "dst"
   ],
   "dependencies": {
+    "boxen": "^6.2.1",
     "configstore": "^6.0.0",
     "gradient-string": "^2.0.0",
     "micro": "^9.3.4",
@@ -25,6 +26,8 @@
     "@babel/preset-env": "^7.17.10",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-replace": "^4.0.0",
+    "dotenv": "^16.0.1",
     "eslint": "^8.12.0",
     "husky": "^7.0.0",
     "lint-staged": "^12.3.7",

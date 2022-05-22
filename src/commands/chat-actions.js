@@ -5,6 +5,7 @@ import { getAppIdPrompt } from '../prompts/app-id'
 import { getChatActionPrompt } from '../prompts/chat-action'
 import { getTextPrompt } from '../prompts/text'
 import { DevPlatformService } from '../services/dev-platform'
+import { config } from '../lib/config'
 
 export async function chatActions(options) {
   const appId = options.appId ?? (await getAppIdPrompt())
@@ -34,7 +35,7 @@ export async function chatActions(options) {
     signale.success(`chat action '${action}' ${button ? 'updated' : 'created'}`)
     signale.info(`app id: ${appId}`)
     signale.info(`chat action id: ${buttonId}`)
-    signale.info(`https://developers.labs.livechat.com/console/apps/${appId}/blocks/chat-actions/${buttonId}`)
+    signale.info(`${config.devConsoleUrl}/apps/${appId}/blocks/chat-actions/${buttonId}`)
   } catch (error) {
     loader.stop()
     signale.error(error.message)

@@ -9,18 +9,23 @@ import { chatWebhooks } from './chat-webhooks'
 import { appWebhooks } from './app-webhooks'
 import { DevPlatformService } from '../services/dev-platform'
 
-const steps = [auth, widget, chatActions, chatBoosters, chatWebhooks, appWebhooks]
+const steps = [widget, chatActions, chatBoosters, chatWebhooks, appWebhooks]
 
 export async function bootstrap({ configPath, baseURL, install }) {
   let configRaw = fs.readFileSync(configPath, { encoding: 'utf-8' })
-  configRaw = configRaw.replace(new RegExp('%baseURL%', 'ig'), baseURL || JSON.parse(configRaw).baseURL)
+  const ogConfig = JSON.parse(configRaw)
+  configRaw = configRaw.replace(new RegExp('%baseURL%', 'ig'), baseURL || ogConfig.baseURL)
 
+  let clientId = ''
   const appConfig = JSON.parse(configRaw)
-
-  const appId = appConfig.appId ?? (await create({ name: appConfig.name }))
+  const appId = appConfig.appId || (await create({ name: appConfig.name }))
 
   if (!appId) {
     process.exit(1)
+  }
+
+  if ('auth' in appConfig) {
+    clientId = await auth({ appId, ...appConfig.auth })
   }
 
   for (const step of steps) {
@@ -36,9 +41,14 @@ export async function bootstrap({ configPath, baseURL, install }) {
     }
   }
 
-  if (install) {
+  if (install || appConfig.install) {
     DevPlatformService.installApp({ appId })
   }
 
-  console.log(gradient.passion(`\n🚀 App bootstrapped 🚀\n`))
+  ogConfig.appId = appId
+  ogConfig.baseURL = baseURL
+  ogConfig.auth.clientId = clientId
+  fs.writeFileSync(configPath, JSON.stringify(ogConfig, null, 2), { encoding: 'utf-8' })
+
+  console.log(gradient.fruit(`\n🚀 App bootstrapped 🚀\n`))
 }

@@ -1,4 +1,5 @@
 import signale from 'signale'
+import { config } from '../lib/config'
 import { loader } from '../lib/loader'
 import { getAppIdPrompt } from '../prompts/app-id'
 import { getURLPrompt } from '../prompts/url'
@@ -22,7 +23,7 @@ export async function appWebhooks(options) {
     signale.success('app webhook added')
     signale.info(`app id: ${appId}`)
     signale.info(`app webhook url: ${url}`)
-    signale.info(`https://developers.labs.livechat.com/console/apps/${appId}/blocks/webhooks`)
+    signale.info(`${config.devConsoleUrl}/apps/${appId}/blocks/webhooks`)
   } catch (error) {
     loader.stop()
     signale.error(error.message)

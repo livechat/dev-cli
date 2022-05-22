@@ -33,7 +33,7 @@ export async function auth(options) {
         clientType,
         redirectURI,
         clientName: app.name,
-        configurationUri: `${config.dpsApiUrl}/v2/applications/${appId}/authorization"`,
+        configurationUri: `${config.devPlatformApiUrl}/v2/applications/${appId}/authorization"`,
       })
       await DevPlatformService.registerSSOClient({ appId, clientId: client_id })
 
@@ -54,7 +54,8 @@ export async function auth(options) {
     } else {
       signale.success('app authorization updated')
     }
-    signale.info(`https://developers.labs.livechat.com/console/apps/${appId}/blocks/authorization`)
+    signale.info(`${config.devConsoleUrl}/apps/${appId}/blocks/authorization`)
+    return clientId
   } catch (error) {
     loader.stop()
     signale.error(error.message)

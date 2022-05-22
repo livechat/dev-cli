@@ -11,7 +11,7 @@ function getHeaders() {
 }
 
 function getBaseURL(appId = '') {
-  return `${config.dpsApiUrl}/v2/applications${appId ? `/${appId}` : ''}`
+  return `${config.devPlatformApiUrl}/v2/applications${appId ? `/${appId}` : ''}`
 }
 
 export const DevPlatformService = {

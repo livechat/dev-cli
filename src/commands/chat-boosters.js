@@ -4,6 +4,7 @@ import { getAppIdPrompt } from '../prompts/app-id'
 import { getURLPrompt } from '../prompts/url'
 import { getTextPrompt } from '../prompts/text'
 import { DevPlatformService } from '../services/dev-platform'
+import { config } from '../lib/config'
 
 export async function chatBoosters(options) {
   const appId = options.appId ?? (await getAppIdPrompt())
@@ -26,7 +27,7 @@ export async function chatBoosters(options) {
     signale.success(`chat booster '${title}' created`)
     signale.info(`app id: ${appId}`)
     signale.info(`chat booster id: ${chatBoosterId}`)
-    signale.info(`https://developers.labs.livechat.com/console/apps/${appId}/blocks/chat-boosters/${chatBoosterId}`)
+    signale.info(`${config.devConsoleUrl}/apps/${appId}/blocks/chat-boosters/${chatBoosterId}`)
   } catch (error) {
     loader.stop()
     signale.error(error.message)

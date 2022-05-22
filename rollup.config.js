@@ -1,7 +1,9 @@
+import 'dotenv/config'
 import fs from 'fs'
 import { defineConfig } from 'rollup'
 import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
+import replace from '@rollup/plugin-replace'
 import pkg from './package.json'
 
 function executable() {
@@ -18,8 +20,17 @@ export default defineConfig({
   external: Object.keys(pkg.dependencies),
   output: {
     format: 'esm',
-    file: pkg.bin.dps,
+    file: pkg.bin.lcdev,
     banner: '#!/usr/bin/env node',
   },
-  plugins: [resolve(), babel({ babelHelpers: 'bundled' }), executable()],
+  plugins: [
+    resolve(),
+    replace({
+      preventAssignment: true,
+      'process.env.CLIENT_ID': JSON.stringify(process.env.CLIENT_ID),
+      'process.env.CLIENT_SECRET': JSON.stringify(process.env.CLIENT_SECRET),
+    }),
+    babel({ babelHelpers: 'bundled' }),
+    executable(),
+  ],
 })

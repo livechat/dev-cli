@@ -6,6 +6,7 @@ import { getTextPrompt } from '../prompts/text'
 import { getChatWebhookActionsPrompt } from '../prompts/chat-webhook-actions'
 import { DevPlatformService } from '../services/dev-platform'
 import { ConfigurationApiService } from '../services/configuration-api'
+import { config } from '../lib/config'
 
 export async function chatWebhooks(options) {
   const appId = options.appId ?? (await getAppIdPrompt())
@@ -47,7 +48,7 @@ export async function chatWebhooks(options) {
     signale.info(`app id: ${appId}`)
     signale.info(`chat webhook url: ${url}`)
     signale.info(`actions: `, actions.join(', '))
-    signale.info(`https://developers.labs.livechat.com/console/apps/${appId}/blocks/chat-webhooks`)
+    signale.info(`${config.devConsoleUrl}/apps/${appId}/blocks/chat-webhooks`)
   } catch (error) {
     loader.stop()
     signale.error(error.message)

@@ -4,6 +4,7 @@ import { getURLPrompt } from '../prompts/url'
 import { getAppIdPrompt } from '../prompts/app-id'
 import { getWidgetPlacementPrompt } from '../prompts/widget-placement'
 import { DevPlatformService } from '../services/dev-platform'
+import { config } from '../lib/config'
 
 export async function widget(options) {
   const appId = options.appId ?? (await getAppIdPrompt())
@@ -36,7 +37,7 @@ export async function widget(options) {
     signale.success(`widget '${placement}' ${widget ? 'updated' : 'created'}`)
     signale.info(`app id: ${appId}`)
     signale.info(`widget id: ${widgetId}`)
-    signale.info(`https://developers.labs.livechat.com/console/apps/${appId}/blocks/widgets/${widgetId}`)
+    signale.info(`${config.devConsoleUrl}/apps/${appId}/blocks/widgets/${widgetId}`)
   } catch (error) {
     loader.stop()
     signale.error(error.message)

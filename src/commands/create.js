@@ -1,4 +1,5 @@
 import signale from 'signale'
+import { config } from '../lib/config'
 import { loader } from '../lib/loader'
 import { getTextPrompt } from '../prompts/text'
 import { DevPlatformService } from '../services/dev-platform'
@@ -19,7 +20,7 @@ export async function create(options) {
     loader.stop()
     signale.success(`app '${name}' created`)
     signale.info(`app id: ${id}`)
-    signale.info(`https://developers.labs.livechat.com/console/apps/${id}`)
+    signale.info(`${config.devConsoleUrl}/console/apps/${id}`)
     return id
   } catch (error) {
     loader.stop()

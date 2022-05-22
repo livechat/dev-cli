@@ -7,9 +7,9 @@
 Use the package manager [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install choosen package in your project.
 
 ```bash
-npm install @livechat/dps-cli
+npm install @livechat/dev-cli
 # or
-yarn add @livechat/dps-cli
+yarn add @livechat/dev-cli
 ```
 
 ## 🚀 Usage
@@ -17,20 +17,20 @@ yarn add @livechat/dps-cli
 ```text
 LiveChat Developer Console CLI
 
-dps [command]
+lcdev [command]
 
 Commands:
-  dps init [dirName]  scafold new LiveChat app project from template
-  dps login           login with your LiveChat account
-  dps bootstrap       bootstrap new LiveChat app using config file
-  dps create          create new LiveChat app
-  dps widget          setup agent app widget
-  dps auth            setup app authorization
-  dps app-webhooks    setup app webhooks
-  dps chat-webhooks   setup chat webhooks
-  dps chat-actions    setup chat actions
-  dps chat-boosters   setup chat boosters
-  dps remove          remove app
+  lcdev init [dirName]  scafold new LiveChat app project from template
+  lcdev login           login with your LiveChat account
+  lcdev bootstrap       bootstrap new LiveChat app using config file
+  lcdev create          create new LiveChat app
+  lcdev widget          setup agent app widget
+  lcdev auth            setup app authorization
+  lcdev app-webhooks    setup app webhooks
+  lcdev chat-webhooks   setup chat webhooks
+  lcdev chat-actions    setup chat actions
+  lcdev chat-boosters   setup chat boosters
+  lcdev remove          remove app
 
 Options:
   --help     Show help
