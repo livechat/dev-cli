@@ -7,9 +7,9 @@
 Use the package manager [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install choosen package in your project.
 
 ```bash
-npm install @livechat/dev-cli
+npm install -g @livechat/dev-cli
 # or
-yarn add @livechat/dev-cli
+yarn global add @livechat/dev-cli
 ```
 
 ## 🚀 Usage

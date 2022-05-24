@@ -33,6 +33,10 @@ export const DevPlatformService = {
       headers: getHeaders(),
     }).then((res) => res.json())
 
+    if (!data) {
+      return null
+    }
+
     if (data.errors) {
       throw new Error(data.errors)
     }

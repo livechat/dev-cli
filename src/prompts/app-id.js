@@ -9,10 +9,15 @@ export async function getAppIdPrompt() {
     const apps = await DevPlatformService.getMyApps()
     loader.stop()
 
+    if (!apps) {
+      signale.warn("you don't have any apps")
+      process.exit(1)
+    }
+
     const { appId } = await prompts({
       type: 'autocomplete',
       name: 'appId',
-      message: 'select the app to which to add the widget',
+      message: 'select the app from the list',
       choices: apps.map((app) => ({ value: app.id, title: app.name })),
     })
 
