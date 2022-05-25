@@ -2,6 +2,10 @@
 
 > This project exposes LiveChat Developer Console capabilities in form of easy to use CLI application. Additionally it allows for quick application bootstrap and project scaffolding.
 
+[![mit](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/livechat/dev-cli)
+[![Check](https://github.com/livechat/dev-cli/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/livechat/dev-cli/actions/workflows/check.yml)
+
 ## 📦 Installation
 
 Use the package manager [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install choosen package in your project.
