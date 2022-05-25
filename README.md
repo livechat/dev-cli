@@ -37,6 +37,57 @@ Options:
   --version  Show version number
 ```
 
+## ⚙️ Getting started
+
+Here you can find a step by step guide how to go from freshly created account in the LiveChat Develoepr Program to a fully working LiveChat App ready to be used on your LiveChat account.
+
+> **Warning**
+> Before you start make sure you already have a LiveChat account (you can [create one here](https://accounts.livechat.com/signup)). You would also need Ngrok, together with free account, installed on your computer to obtain temporary and secure public domain for your local app (follow [this instructions](https://ngrok.com/download)).
+
+1. Install the `LiveChat Developer Console CLI`:
+
+```sh
+npm install -g @livechat/dev-cli
+```
+
+2. Check that you are using the latest version and can access CLI:
+
+```sh
+lcdev --version
+```
+
+3. Login to your LiveChat account inside the CLI:
+
+```sh
+lcdev login
+```
+
+4. Initialize a new project from our official [Nex.js app template](https://github.com/livechat/next-app):
+
+```sh
+lcdev init first-livechat-app
+```
+
+5. Install project dependencies and start local dev server:
+
+```sh
+cd first-livechat-app
+npm install
+npm run dev
+```
+
+6. Open the HTTP tunnel to obtain secure public domain for your local app:
+
+```sh
+ngrok http 3000
+```
+
+7. Bootstrap the new LiveChat App providing newly established public domain:
+
+```sh
+lcdev bootstrap --baseURL <your-https-domain-from-ngrok>
+```
+
 ## 🏗 Contributing
 
 Read our [Contributing Guide](CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes.
