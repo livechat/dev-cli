@@ -16,6 +16,10 @@ export async function getScopesPrompt() {
       choices: allScopes.map((s) => ({ value: s.scope, title: s.scope })),
     })
 
+    if (scopes?.length === 0) {
+      return null
+    }
+
     return scopes
   } catch (error) {
     loader.stop()

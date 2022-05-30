@@ -14,5 +14,9 @@ export async function getChatWebhookActionsPrompt() {
     },
   ])
 
+  if (actions?.length === 0) {
+    return null
+  }
+
   return actions
 }

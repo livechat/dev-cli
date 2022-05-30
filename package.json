@@ -1,6 +1,6 @@
 {
   "name": "@livechat/dev-cli",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "This project exposes LiveChat Developer Console capabilities in form of easy to use CLI application.",
   "publishConfig": {
     "access": "public"
