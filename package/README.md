@@ -1,6 +1,6 @@
 # <img src="https://livechat.design/images/livechat/DIGITAL%20%28RGB%29/SVG/Mark_RGB_Orange.svg" widht="24px" height="24px" /> LiveChat Developer Console CLI
 
-> This project exposes LiveChat Developer Console capabilities in form of easy to use CLI application. Additionally it allows for quick application bootstrap and project scaffolding.
+> This project unlocks LiveChat Developer Console capabilities in form of easy to use CLI application. Additionally it allows for quick application bootstrap and project scaffolding.
 
 [![mit](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/livechat/dev-cli)
@@ -8,7 +8,7 @@
 
 ## 📦 Installation
 
-Use the package manager [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install choosen package in your project.
+Use the [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) package managers to install the dev-cli package in your project.
 
 ```bash
 npm install -g @livechat/dev-cli
@@ -43,10 +43,10 @@ Options:
 
 ## ⚙️ Getting started
 
-Here you can find a step by step guide how to go from freshly created account in the LiveChat Develoepr Program to a fully working LiveChat App ready to be used on your LiveChat account.
+Below you'll find a step by step guide how to go from a brand new LiveChat Developer Program account to a fully working LiveChat application ready to be used on your LiveChat account.
 
 > **Warning**
-> Before you start make sure you already have a LiveChat account (you can [create one here](https://accounts.livechat.com/signup)). You would also need Ngrok, together with free account, installed on your computer to obtain temporary and secure public domain for your local app (follow [this instructions](https://ngrok.com/download)).
+> Before you start make sure to already have a LiveChat account (you can [create one here](https://accounts.livechat.com/signup)). You will also need Ngrok together with its free account installed on your computer to obtain a temporary and secure public domain for your local application (follow [these instructions](https://ngrok.com/download)).
 
 1. Install the `LiveChat Developer Console CLI`:
 
@@ -54,7 +54,7 @@ Here you can find a step by step guide how to go from freshly created account in
 npm install -g @livechat/dev-cli
 ```
 
-2. Check that you are using the latest version and can access CLI:
+2. Verify that you are using the latest version and can access the CLI:
 
 ```sh
 lcdev --version
@@ -86,7 +86,7 @@ npm run dev
 ngrok http 3000
 ```
 
-7. Bootstrap the new LiveChat App providing newly established public domain:
+7. Bootstrap your new LiveChat app by providing the newly established public domain:
 
 ```sh
 lcdev bootstrap --baseURL <your-https-domain-from-ngrok>
@@ -94,7 +94,7 @@ lcdev bootstrap --baseURL <your-https-domain-from-ngrok>
 
 ## 🏗 Contributing
 
-Read our [Contributing Guide](CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes.
+Read the [Contributing Guide](CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes.
 
 This project has adopted a [Code of Conduct](CODE_OF_CONDUCT.md) that we expect project participants to adhere to. Please read the full text so that you can understand what actions will and will not be tolerated.
 
