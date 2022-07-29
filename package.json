@@ -16,7 +16,7 @@
     "boxen": "^6.2.1",
     "configstore": "^6.0.0",
     "gradient-string": "^2.0.0",
-    "micro": "^9.3.4",
+    "micro": "9.4.0",
     "node-fetch": "^3.2.3",
     "open": "^8.4.0",
     "ora": "^6.1.0",
