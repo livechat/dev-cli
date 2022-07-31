@@ -1,6 +1,6 @@
 {
   "name": "@livechat/dev-cli",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "This project exposes LiveChat Developer Console capabilities in form of easy to use CLI application.",
   "publishConfig": {
     "access": "public"
@@ -16,7 +16,7 @@
     "boxen": "^6.2.1",
     "configstore": "^6.0.0",
     "gradient-string": "^2.0.0",
-    "micro": "9.4.0",
+    "micro": "9.4.1",
     "node-fetch": "^3.2.3",
     "open": "^8.4.0",
     "ora": "^6.1.0",

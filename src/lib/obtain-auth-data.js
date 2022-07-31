@@ -1,36 +1,34 @@
 import open from 'open'
-import http from 'http'
 import micro, { send } from 'micro'
 import { config } from './config'
 import { AccountsService } from '../services/accounts'
 
 export async function obtainAuthData() {
   return new Promise((resolve, reject) => {
-    const server = http.Server(
-      micro(async (req, res) => {
-        const { searchParams } = new URL(`${config.webServerUrl}${req.url}`)
-        if (searchParams.has('code')) {
-          try {
-            const data = await AccountsService.codeGrant({ code: searchParams.get('code').replace('%3A', ':') })
-            server.close((error) => {
-              if (error) {
-                reject(error)
-              } else {
-                resolve(data)
-              }
-            })
-          } catch (error) {
-            server.close(() => {
+    const server = micro(async (req, res) => {
+      const { searchParams } = new URL(`${config.webServerUrl}${req.url}`)
+      if (searchParams.has('code')) {
+        try {
+          const data = await AccountsService.codeGrant({ code: searchParams.get('code').replace('%3A', ':') })
+          server.close((error) => {
+            if (error) {
               reject(error)
-            })
-            return
-          }
+            } else {
+              resolve(data)
+            }
+          })
+        } catch (error) {
+          server.close(() => {
+            reject(error)
+          })
+          return
         }
+      }
 
-        send(
-          res,
-          200,
-          `
+      send(
+        res,
+        200,
+        `
         <html>
           <style>
             .center {
@@ -58,9 +56,8 @@ export async function obtainAuthData() {
           </body>
         </html>
       `,
-        )
-      }),
-    )
+      )
+    })
 
     const url = new URL(config.accountsUrl)
     url.searchParams.set('response_type', 'code')
