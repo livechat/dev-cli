@@ -1,3 +1,7 @@
+### ⚠️ DEPRECATED ⚠️
+
+This repository is archived and no longer maintained. Instead take a look at: https://github.com/livechat/developer-studio.
+
 # <img src="https://livechat.design/images/livechat/DIGITAL%20%28RGB%29/SVG/Mark_RGB_Orange.svg" widht="24px" height="24px" /> LiveChat Developer Console CLI
 
 > This project unlocks LiveChat Developer Console capabilities in form of easy to use CLI application. Additionally it allows for quick application bootstrap and project scaffolding.
